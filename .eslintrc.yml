@@ -7,4 +7,7 @@ extends:
 parserOptions:
   ecmaVersion: 2018
 rules:
+  indent: [ error, 4 ]
   no-console: off
+  no-restricted-syntax: off
+  no-use-before-define: [ error, { functions: false } ]
