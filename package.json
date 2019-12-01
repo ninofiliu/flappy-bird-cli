@@ -1,0 +1,17 @@
+{
+    "name": "flappy-bird-cli",
+    "version": "0.0.0",
+    "description": "CLI version of the famous game by Dong Nguyen",
+    "keywords": [
+        "cli",
+        "flappy-bird",
+        "game"
+    ],
+    "homepage": "https://github.com/ninofiliu/flappy-bird-cli",
+    "license": "ISC",
+    "author": "Nino Filiu <nino.filiu@gmail.com> (https://ninofiliu.com)",
+    "bin": {
+        "flappy-bird": "./src/cli.js"
+    },
+    "repository": "github:ninofiliu/flappy-bird-cli"
+}
