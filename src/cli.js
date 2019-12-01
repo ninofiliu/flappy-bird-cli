@@ -1,2 +1,6 @@
 #!/usr/bin/env node
-console.log('For now, I do nothing');
+const keyboard = require('./keyboard');
+const intro = require('./activities/intro');
+
+keyboard.listen();
+intro.start();
