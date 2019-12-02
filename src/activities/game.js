@@ -6,24 +6,23 @@ const gameOver = require('./game-over');
 
 module.exports = {
 
-    state: {
-        score: 0,
-        frame: 0,
-        paused: false,
-        bird: {
-            x: 10,
-            y: 18,
-            yy: 0,
-        },
-        obstacles: [
-            {
-                x: config.screenWidth,
-                y: Math.floor(config.screenHeight * Math.random()),
-            },
-        ],
-    },
-
     start() {
+        this.state = {
+            score: 0,
+            frame: 0,
+            paused: false,
+            bird: {
+                x: 20,
+                y: 18,
+                yy: 0,
+            },
+            obstacles: [
+                {
+                    x: config.screenWidth,
+                    y: Math.floor(config.screenHeight * Math.random()),
+                },
+            ],
+        };
         canvas.reset();
         this.update();
         keyboard.listenersByLetter = {
