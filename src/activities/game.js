@@ -83,7 +83,7 @@ module.exports = {
             const { bird } = this.state;
             for (const obstacle of this.state.obstacles) {
                 if (Math.abs(bird.x - obstacle.x) < config.birdSizeX + config.obstaclesSizeX) {
-                    if (Math.abs(bird.y - obstacle.y) > config.obstaclesSizeY) {
+                    if (Math.abs(bird.y - obstacle.y) > config.obstaclesSizeY - config.birdSizeY) {
                         return true;
                     }
                 }
@@ -105,6 +105,7 @@ module.exports = {
             process.exit();
             break;
         case 'game-over':
+            this.render();
             gameOver.start({ score: this.state.score });
         }
     },
