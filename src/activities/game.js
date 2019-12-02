@@ -2,6 +2,7 @@ const { colors } = require('console-canvas');
 const canvas = require('../canvas');
 const keyboard = require('../keyboard');
 const config = require('../config');
+const gameOver = require('./game-over');
 
 module.exports = {
 
@@ -37,13 +38,17 @@ module.exports = {
         };
     },
     update() {
-        if (this.paused) return;
+        if (this.state.paused) return;
         this.state.frame++;
 
         moveBird.bind(this)();
         moveObstacles.bind(this)();
         updateObstacles.bind(this)();
-        endIfGameOver.bind(this)();
+        if (isGameOver.bind(this)()) {
+            this.end('game-over');
+            return;
+        }
+        updateScore.bind(this)();
 
         this.render();
         setTimeout(() => this.update(), 1000 / config.fps);
@@ -75,13 +80,21 @@ module.exports = {
                 this.state.obstacles.shift();
             }
         }
-        function endIfGameOver() {
+        function isGameOver() {
             const { bird } = this.state;
             for (const obstacle of this.state.obstacles) {
                 if (Math.abs(bird.x - obstacle.x) < config.birdSizeX + config.obstaclesSizeX) {
-                    if (Math.abs(bird.y - obstacle.y) > config.obstaclesSizeY - config.birdSizeY) {
-                        this.end('game-over');
+                    if (Math.abs(bird.y - obstacle.y) > config.obstaclesSizeY) {
+                        return true;
                     }
+                }
+            }
+            return false;
+        }
+        function updateScore() {
+            if (this.state.frame >= 30) {
+                if ((this.state.frame - 30) % (config.obstaclesSpacing / config.obstaclesSpeed) === 0) {
+                    this.state.score++;
                 }
             }
         }
@@ -93,11 +106,7 @@ module.exports = {
             process.exit();
             break;
         case 'game-over':
-            // TODO
-            this.render();
-            canvas.finish();
-            console.log('game over');
-            process.exit();
+            gameOver.start({ score: this.state.score });
         }
     },
 
