@@ -1,6 +1,6 @@
 {
     "name": "flappy-bird-cli",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "CLI version of the famous game by Dong Nguyen",
     "keywords": [
         "cli",
