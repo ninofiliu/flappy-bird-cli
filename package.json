@@ -20,6 +20,6 @@
         "eslint-plugin-import": "^2.18.2"
     },
     "dependencies": {
-        "console-canvas": "^1.1.0"
+        "console-canvas": "^1.2.0"
     }
 }

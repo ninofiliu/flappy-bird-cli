@@ -10,5 +10,6 @@ rules:
   default-case: off
   indent: [ error, 4 ]
   no-console: off
+  no-plusplus: off
   no-restricted-syntax: off
   no-use-before-define: [ error, { functions: false } ]

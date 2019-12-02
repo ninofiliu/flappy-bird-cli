@@ -2,9 +2,27 @@ const { colors } = require('console-canvas');
 const keyboard = require('../keyboard');
 const canvas = require('../canvas');
 const config = require('../config');
+const game = require('./game');
 
 module.exports = {
-    state: {},
+    start() {
+        this.render();
+        keyboard.listenersByLetter = {
+            p: () => this.end('game'),
+            q: () => this.end('quit'),
+        };
+    },
+    end(activity) {
+        switch (activity) {
+        case 'game':
+            game.start();
+            break;
+        case 'quit':
+            canvas.finish();
+            process.exit();
+            break;
+        }
+    },
     render() {
         renderBackground();
         renderBox();
@@ -22,24 +40,6 @@ module.exports = {
             canvas.write(22, 17, 'Idea by Dong Nguyen', colors.fg.black);
             canvas.write(22, 19, '[p] play', colors.fg.black);
             canvas.write(22, 20, '[q] quit', colors.fg.black);
-        }
-    },
-    start() {
-        this.render();
-        keyboard.listenersByLetter = {
-            p: () => this.go('game'),
-            q: () => this.go('quit'),
-        };
-    },
-    go(activity) {
-        switch (activity) {
-        case 'game':
-            // TODO
-            break;
-        case 'quit':
-            canvas.finish();
-            process.exit();
-            break;
         }
     },
 };
